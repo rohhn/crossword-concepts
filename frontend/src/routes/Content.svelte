@@ -13,7 +13,7 @@
   }
 </script>
 
-<Tabs.Root value="crossword" class="w-[75vw] h-[90vh]">
+<Tabs.Root value="crossword" class="w-[65vw] h-[90vh]">
   <Tabs.List class="grid w-full grid-cols-2">
     <Tabs.Trigger value="crossword">Crossword 🧩</Tabs.Trigger>
     <Tabs.Trigger value="password">Word Play 🔎</Tabs.Trigger>
