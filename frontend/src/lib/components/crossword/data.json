@@ -1,0 +1,97 @@
+{
+  "solution": "s e q u e n c e t r a n s l a t i o n . \nu . . . . . . . . . t . . a . . . . . . \np . . k e y p o s i t i o n s . . . . . \ne . e . . . r . . . e . . g . . v . . . \nr . n . s . o . . . n . . u . . a . . . \ni . g . e . c . s . t . . a . . n . . . \no . l . l . e . h . i . . g . . i . . . \nr . i . f . s . a . o . . e . . s i x . \np . s . a . s . z . n . . t . . h . . . \ne . h . t . i . e . m . . r . . i . . . \nr . f . t . n . e . e . . a . . n . . . \nf . r . e . g . r . c . . n . . g . . . \no . e . n . s . p . h . . s . . p . . . \nr . n . t . p . a . a . . l . . r . . . \nm a c h i n e t r a n s l a t i o n . . \na . h . o . e . m . i . . t . . b . . . \nn . . . n . d . a . s . . i . b l e u . \nc . . . . . . . r . m . . o . . e . . . \ne . . . . . . . . . . . . n . . m . . . \n. . . . . . . . . . . . . . . . . . . . \n",
+  "legend": [
+    {
+      "answer": "superiorperformance",
+      "x": 1,
+      "y": 1,
+      "direction": "down",
+      "clue": "What was the most notable result of the paper?"
+    },
+    {
+      "answer": "sequencetranslation",
+      "x": 1,
+      "y": 1,
+      "direction": "across",
+      "clue": "What is the essential task of NMT?"
+    },
+    {
+      "answer": "languagetranslation",
+      "x": 14,
+      "y": 1,
+      "direction": "down",
+      "clue": "What is a common application of the model proposed in the paper?"
+    },
+    {
+      "answer": "attentionmechanism",
+      "x": 11,
+      "y": 1,
+      "direction": "down",
+      "clue": "What is the key invention in this paper to solve long sequence lengths problem in RNNs?"
+    },
+    {
+      "answer": "machinetranslation",
+      "x": 1,
+      "y": 15,
+      "direction": "across",
+      "clue": "What was the primary focus of the paper?"
+    },
+    {
+      "answer": "vanishingproblem",
+      "x": 17,
+      "y": 4,
+      "direction": "down",
+      "clue": "What is another name for the Gradient Problem?"
+    },
+    {
+      "answer": "processingspeed",
+      "x": 7,
+      "y": 3,
+      "direction": "down",
+      "clue": "What's the benefit of the newly introduced attention mechanism?"
+    },
+    {
+      "answer": "selfattention",
+      "x": 5,
+      "y": 5,
+      "direction": "down",
+      "clue": "What makes this study distinguishable from former ones?"
+    },
+    {
+      "answer": "shazeerparmar",
+      "x": 9,
+      "y": 6,
+      "direction": "down",
+      "clue": "Who are the secondary authors of the paper?"
+    },
+    {
+      "answer": "englishfrench",
+      "x": 3,
+      "y": 4,
+      "direction": "down",
+      "clue": "What language pair was used for the translation task in the paper?"
+    },
+    {
+      "answer": "keypositions",
+      "x": 4,
+      "y": 3,
+      "direction": "across",
+      "clue": "To what does the key innovation in the paper give more weightage?"
+    },
+    {
+      "answer": "bleu",
+      "x": 16,
+      "y": 17,
+      "direction": "across",
+      "clue": "What metric was used to measure the performance of the model?"
+    },
+    {
+      "answer": "six",
+      "x": 17,
+      "y": 8,
+      "direction": "across",
+      "clue": "How many layers are in the encoder and decoder in the proposed model?"
+    }
+  ],
+  "word_find": "s e q u e n c e t r a n s l a t i o n e \nu z u w b e r d f u t a u a c e j n m j \np k u k e y p o s i t i o n s y o i y t \ne b e p c m r f l p e h l g a n v m c n \nr o n z s k o g w k n r x u p z a a b w \ni z g i e i c b s g t d j a b m n p w b \no l l c l i e l h p i g l g w a i q w i \nr u i k f z s q a n o t e e d a s i x o \np l s w a m s s z s n t f t s r h l q x \ne d h m t p i w e j m e m r o f i q d a \nr x f h t g n m e n e r x a n p n q o e \nf i r x e i g s r q c t s n s w g i y o \no l e p n z s r p x h z j s e g p t v o \nr j n t t v p u a z a v w l b x r v o a \nm a c h i n e t r a n s l a t i o n u m \na n h x o b e m m m i y g t f b b h m h \nn g g j n m d z a z s b g i c b l e u c \nc m w t e u w v r l m b y o e h e f r f \ne s g e b w k r u z r j u n a q m m u p \nb o z i l n m c t t z l e w c d n t z q \n"
+}
