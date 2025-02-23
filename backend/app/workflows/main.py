@@ -1,6 +1,6 @@
 from langchain_core.messages import HumanMessage
 from langgraph.graph import END, START, MessagesState, StateGraph
-from app.utils import Crossword
+from ..utils import Crossword
 from ..models import Model
 import json
 
@@ -26,13 +26,14 @@ def build_crossword(state: MessagesState):
     last_msg = state["messages"][-1].content
     json_data = json.loads(last_msg) # pyright: ignore
     pairs = zip(json_data["answers"], json_data["questions"])
-    crossword = Crossword(20, 20, '.', 5_000, pairs)
+    crossword = Crossword(20, 20, '.', 1_000, pairs)
     crossword.compute_crossword(2)
     crossword.legend()
+
     data = {
         'solution': crossword.solution(),
         'legend': json.loads(crossword.legend()),
-        'word_find': crossword.word_find()
+        'word_find': crossword.word_find(),
     }
     data = json.dumps(data, indent=2)
 
