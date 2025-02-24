@@ -1,0 +1,35 @@
+Grid.svelte
+
+<div class="grid border-black border" style="grid-template-columns: repeat({gridSize}, 2rem);">
+  {#each puzzle as row, rowIdx}
+    {#each row as cellValue, colIdx}
+      <Cell
+        xCoord={rowIdx}
+        yCoord={colIdx}
+        {cellValue}
+        gridSize={numCols}
+        questionNumber={computeQuestionNumber(rowIdx, colIdx)}
+      ></Cell>
+      <!-- <div class="m-0 p-0">
+        {#if cellValue === "."}
+          <div class="w-[30px] h-[30px]"></div>
+        {:else}
+          {@const sup = computeQuestionNumber(rowIdx, colIdx)}
+          <div class="relative inline-block" data-sup={sup}>
+            <input
+              maxlength="1"
+              class="w-[30px] h-[30px] flex justify-center text-center items-center cursor-pointer hover:bg-red-50 focus:outline-none text-[1rem]"
+              placeholder={cellValue}
+              class:bg-green-100={currentQuestion === sup}
+              style="caret-color: transparent;"
+              on:click|preventDefault={() =>
+                toast.info("event created", {
+                  description: `at ${rowIdx + 1}, ${colIdx + 1}`,
+                })}
+            />
+          </div>
+        {/if}
+      </div> -->
+    {/each}
+  {/each}
+</div>

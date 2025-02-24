@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[data-status="correct"] {
+    background-color: theme(backgroundColor.green.200);
+}
+
+input[data-status="incorrect"] {
+    background-color: theme(backgroundColor.red.100);
+}
+
+input[data-status="empty"] {
+    background-color: transparent;
+}
