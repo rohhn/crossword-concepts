@@ -1,5 +1,5 @@
 <script lang="ts">
-  import "./crossword.css";
+  // import "./crossword.css";
   import type { ChangeEventHandler } from "svelte/elements";
   import Input from "../ui/input/input.svelte";
   import { toast } from "svelte-sonner";
@@ -37,6 +37,7 @@
     if (target) {
       target.value = "";
     }
+    // checkCellValue(event);
   };
 
   const checkCellValue: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -71,9 +72,12 @@
       >
     {/if}
     <Input
-      class="p-0 text-center rounded-none shadow-none drop-shadow-none caret-transparent {computeBorderClasses()} 
+      class="p-0 text-center rounded-none shadow-none drop-shadow-none caret-transparent {computeBorderClasses()}
+      {cell.enteredValue !== cell.correctValue ? 'bg-red-100' : ''}
+      {cell.enteredValue === '' ? 'bg-transparent' : ''}
+      {cell.enteredValue === cell.correctValue ? 'bg-green-200' : ''}
       {_questionNumbers.includes(currentSelectedQuestionIdx) ? 'bg-amber-200' : ''}
-      focus:bg-sky-100 "
+      focus:bg-sky-100"
       type="text"
       maxlength={1}
       disabled={_isBlankCell}
@@ -85,7 +89,7 @@
       data-xcoord={cell.xCoord}
       data-ycoord={cell.yCoord}
       bind:value={cell.enteredValue}
-      on:focus={clearCellValue}
+      onfocus={clearCellValue}
     />
   {/if}
 </div>

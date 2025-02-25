@@ -45,10 +45,9 @@
 
   export let currentSelectedQuestionIdx: number = -999;
   export let puzzleSolved: boolean = false;
+  export let openAlertDialog: boolean = false;
   export let currentX: number = 0;
   export let currentY: number = 0;
-
-  // TODO: Redirect to Puzzle page if no data is present
 
   let puzzle = data.solution
     .trim()
@@ -171,7 +170,6 @@
   };
 
   export const checkSolution = () => {
-    // TODO: show the user if the puzzle is correct, Alert Dialog? Freeze the puzzle?
     let isSolved = true;
     let checkIdx = 0;
 
@@ -208,6 +206,7 @@
           <Button
             onclick={() => {
               puzzleSolved = checkSolution();
+              openAlertDialog = true;
             }}>Check</Button
           >
         </div>
@@ -219,18 +218,29 @@
     </div>
   </div>
 
-  <AlertDialog.Root open={puzzleSolved}>
+  <AlertDialog.Root open={openAlertDialog}>
     <AlertDialog.Content>
-      <AlertDialog.Header>
-        <AlertDialog.Title>Congratulations!</AlertDialog.Title>
-        <AlertDialog.Description>You did it!</AlertDialog.Description>
-      </AlertDialog.Header>
+      {#if puzzleSolved}
+        <AlertDialog.Header>
+          <AlertDialog.Title>Congratulations!</AlertDialog.Title>
+          <AlertDialog.Description>You did it!</AlertDialog.Description>
+        </AlertDialog.Header>
+      {:else}
+        <AlertDialog.Header>
+          <AlertDialog.Title>Ooops!</AlertDialog.Title>
+          <AlertDialog.Description>u dumb!</AlertDialog.Description>
+        </AlertDialog.Header>
+      {/if}
       <AlertDialog.Footer>
         <AlertDialog.Cancel
           onclick={() => {
             puzzleSolved = false;
+            openAlertDialog = false;
           }}>Close</AlertDialog.Cancel
         >
+        {#if puzzleSolved}
+          <a href="/puzzle"><Button>New Game</Button></a>
+        {/if}
       </AlertDialog.Footer>
     </AlertDialog.Content>
   </AlertDialog.Root>
