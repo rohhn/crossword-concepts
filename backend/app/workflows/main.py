@@ -1,5 +1,6 @@
 from langchain_core.messages import HumanMessage
 from langgraph.graph import END, START, MessagesState, StateGraph
+from langgraph.graph.message import Messages
 from ..utils import Crossword
 from ..models import Model
 import json
@@ -41,6 +42,11 @@ def build_crossword(state: MessagesState):
             "messages": HumanMessage(content=data)
     }
 
+def similarity_llm(state: MessagesState):
+    prompt = """
+    You are to develop a question based on the topic provided and the answer shoudl be in one word.
+    """
+    llm = Model(prompt="You are to develop a question and its answer, which will")
 
 def chain():
     graph = StateGraph(MessagesState)
@@ -51,3 +57,7 @@ def chain():
     graph.add_edge("BUIDL", END)
     flow = graph.compile()
     return flow
+
+def similarty_chain():
+    graph = StateGraph(MessagesState)
+    graph.add_node("LLM", llm_node)

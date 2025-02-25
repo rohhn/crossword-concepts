@@ -4,7 +4,7 @@ from langgraph.graph import MessagesState
 from ..utils import RespSchema
 
 class Model():
-    def __init__(self, model="gpt-4-0613", tools=[]):
+    def __init__(self, model="gpt-4o-mini-2024-07-18", prompt=None, tools=[]):
         self.llm = ChatOpenAI(model=model).with_structured_output(RespSchema)
         if tools:
             self.llm = self.llm.bind(tools=tools)
@@ -14,11 +14,13 @@ class Model():
         and their corresponding one or two worded answers that would be fit for a crossword game.
 
         *DOs*
-        + get questions that have answerse fit for making dense crosswords
+        + get question answer pairs that have answers with lots of common letters at differnt places (for making denser crosswords)
 
         *DONTs*
         + do not prepend question number to the returned questions.
         """
+        if prompt:
+            self.system_msg = prompt
 
     def invoke(self, state: MessagesState, config={}):
         messages = [

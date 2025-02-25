@@ -3,7 +3,10 @@ import unittest
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from app.workflows import chain
+from dotenv import load_dotenv
 
+
+load_dotenv("./app/.env")
 
 class TestWorkflow(unittest.TestCase):
     """ test consistency in graph state """
@@ -22,4 +25,6 @@ class TestWorkflow(unittest.TestCase):
         self.assertIsInstance(self.workflow.invoke(param), type_param)
 
 if __name__ == "__main__":
+    import os
+    os.getenv("OPENAI_API_KEY")
     unittest.main()

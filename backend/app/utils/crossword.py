@@ -4,6 +4,7 @@ import re
 import time
 import string
 import random
+from numba import njit
 from copy import copy as duplicate
 
 """
@@ -27,6 +28,7 @@ Response format:
   },
 }
 """
+
 class Crossword(object):
     def __init__(self, cols, rows, empty='-', maxloops=2000, available_words=[]):
         self.cols = cols

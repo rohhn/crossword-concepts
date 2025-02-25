@@ -10,7 +10,7 @@ class TestDocumentParsing(unittest.TestCase):
             self.pdf_bytes = pdf_file.read()
 
     def test_sections(self):
-        document = parse_pdf(self.pdf_bytes)
+        document = base_reader(self.pdf_bytes)
         document = list(document)
         self.assertEqual(len(document), 16)
 

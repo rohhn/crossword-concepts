@@ -34,7 +34,11 @@ async def upload_file(file: UploadFile, auth=Depends(dummy)):
     bytes = await file.read()
     doc = list(base_reader(bytes))
     print(doc[:2])
-    return {"file": file.filename }
+    resp = chain().invoke({
+        "messages": HumanMessage(content=f"make gme from this\n{doc}")
+    })["messages"][-1].content
+    resp = json.loads(resp)
+    return {"file": file.filename, "game": resp }
 
 @app.post("/puzzle")
 async def create_crossword(query: str):
