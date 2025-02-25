@@ -9,7 +9,7 @@
   export let url = "";
 </script>
 
-<main class="border-1 border-black min-h-screen p-0 mx-8 my-2 flex-col">
+<main class="border-1 border-black min-h-screen p-0 mx-8 my-2 flex-col m-0">
   <Router
     {url}
     viewtransition={() => ({
@@ -23,7 +23,7 @@
       <h5 class="font-semibold font-mono">
         <a href="/">Crossword Concepts</a>
       </h5>
-      <nav class="flex flex-row pb-[1rem] text-sm">
+      <nav class="flex flex-row pb-[1rem] text-sm font-semibold">
         <Link to="/puzzle" class="m-[.4rem]">play</Link>
         <Link to="/about" class="m-[.4rem]">about</Link>
       </nav>

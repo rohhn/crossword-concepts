@@ -23,8 +23,8 @@
   console.log(gameData);
 </script>
 
-<Tabs.Root value="crossword" class="w-full h-[90vh]">
-  <Tabs.List class="grid w-full grid-cols-2">
+<Tabs.Root value="crossword" class="w-[75vw] h-[90vh] mx-auto">
+  <Tabs.List class="grid w-[40vw] grid-cols-2 mx-auto">
     <Tabs.Trigger value="crossword">Crossword 🧩</Tabs.Trigger>
     <Tabs.Trigger value="word-search">Guess the word 🔎</Tabs.Trigger>
   </Tabs.List>
@@ -33,7 +33,8 @@
       <Card.Header>
         <Card.Description>play a game of crossword...</Card.Description>
       </Card.Header>
-      <Card.Content class="w-full h-full px-4">
+      <!-- hardcoded height to cuz Card compoent auto adjusts to height, wordguess component shrinks -->
+      <Card.Content class="w-full h-[75wh] px-4">
         <Crossword bind:data={crosswordData} />
       </Card.Content>
     </Card.Root>
@@ -45,7 +46,7 @@
           >...or maybe word guess, if that's your thing.</Card.Description
         >
       </Card.Header>
-      <Card.Content class="w-[65vw] h-[80vh]">
+      <Card.Content class="w-full h-[75vh] px-4">
         <WordGuess bind:data={wordguessData} />
       </Card.Content>
     </Card.Root>

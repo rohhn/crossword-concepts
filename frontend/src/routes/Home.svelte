@@ -33,7 +33,7 @@
           <img
             src={Gif}
             alt="Description of GIF"
-            class="w-[10vw] mx-auto mt-[.5rem] rounded-sm"
+            class="w-[15vw] mx-auto mt-[.5rem] rounded-sm"
           />
         </div>
       </div>
