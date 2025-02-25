@@ -4,7 +4,6 @@ import re
 import time
 import string
 import random
-from numba import njit
 from copy import copy as duplicate
 
 """
