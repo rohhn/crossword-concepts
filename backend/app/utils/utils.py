@@ -1,6 +1,6 @@
 from functools import reduce
 from typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, conlist
 
 def compose(*fns):
     """
@@ -29,3 +29,14 @@ class RespSchema(BaseModel):
     #     description="hints for each question, each containing exactly 3 strings."
     # )
     answers: List[str] = Field(..., description="solutions for the puzzle questions.")
+
+class WordGuessSchema(BaseModel):
+    """ schema for the hot or cold game """
+    questions: List[str] = Field(..., description="questions for hot or cold game puzzle.")
+    words: List[str] = Field(..., description="the words the player needs to guess")
+    # hints: conlist(str, min_length=3, max_length=3) = Field(..., description="hints for the word to guess.")
+
+
+class SimilarityJSON(BaseModel):
+    target: str
+    prediction: str

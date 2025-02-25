@@ -2,10 +2,11 @@
   import { toast } from "svelte-sonner";
   import FileUI from "$lib/components/subUI/FileUI.svelte";
   import GameUI from "$lib/components/subUI/gameUI.svelte";
-  import type { CrosswordData } from "$lib/components/crossword/Crossword.svelte";
+  import type { GameType } from "$lib/components/subUI/gameUI.svelte";
 
   let uploadComplete: boolean = false;
-  let crosswordData: CrosswordData | null = null;
+  let gameData: GameType | null = null;
+  // let crosswordData: CrosswordData | null = null;
   const ENDPOINT = "http://127.0.0.1:8000";
 
   async function resolveUpload(files: FileList) {
@@ -18,7 +19,7 @@
     formData.append("file", file);
     uploadComplete = true;
 
-    const uploadPromise = fetch(`${ENDPOINT}/upload`, {
+    const uploadPromise = fetch(`${ENDPOINT}/play`, {
       method: "POST",
       body: formData,
     })
@@ -29,12 +30,8 @@
         return response.json();
       })
       .then((data) => {
-        const gameData = data.game;
-        crosswordData = {
-          legend: gameData.legend,
-          solution: gameData.solution,
-        };
-        return crosswordData;
+        gameData = data;
+        return gameData;
       });
 
     toast.promise(uploadPromise, {
@@ -51,8 +48,8 @@
   }
 </script>
 
-{#if uploadComplete && crosswordData}
-  <GameUI {crosswordData} />
+{#if uploadComplete && gameData}
+  <GameUI {gameData} />
 {:else}
   <FileUI fileHandler={resolveUpload} />
 {/if}

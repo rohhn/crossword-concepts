@@ -9,63 +9,48 @@ def _():
     import marimo as mo
     from dotenv import load_dotenv
     load_dotenv("./.env")
-    from utils.FileReader import base_reader
-    from models import Model
-    from workflows import chain
     from langgraph.graph import MessagesState
     from langchain_core.messages import HumanMessage
-    from langchain_openai import ChatOpenAI
+    from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+    from langchain.evaluation import load_evaluator, EmbeddingDistance
+    from langchain_community.embeddings import HuggingFaceEmbeddings
     import json
+    evaluator = load_evaluator(
+        "embedding_distance", distance_metric=EmbeddingDistance.COSINE
+    )
+
+    embedding_model = HuggingFaceEmbeddings(model_name="TaylorAI/gte-tiny")
+    hf_evaluator = load_evaluator("embedding_distance", embeddings=embedding_model)
     return (
         ChatOpenAI,
+        EmbeddingDistance,
+        HuggingFaceEmbeddings,
         HumanMessage,
         MessagesState,
-        Model,
-        base_reader,
-        chain,
+        OpenAIEmbeddings,
+        embedding_model,
+        evaluator,
+        hf_evaluator,
         json,
         load_dotenv,
+        load_evaluator,
         mo,
     )
 
 
 @app.cell
-def _(chain, mo):
-    mo.mermaid((workflow:=chain()).get_graph().draw_mermaid())
-    return (workflow,)
+def _():
+    li = ['dog', 'kitten', 'traffic', 'cow', 'animal', 'pet', 'tyson', 'game', 'china']
+    return (li,)
 
 
 @app.cell
-def _(HumanMessage, workflow):
-    resp = workflow.invoke({
-        "messages": [ HumanMessage(content="puzzle for attention is all you need paper")]
-    })
-    return (resp,)
-
-
-@app.cell
-def _(resp):
-    resp
-    return
-
-
-@app.cell
-def _(json, resp):
-    sol = json.loads(resp["messages"][-1].content)
-    sol["solution"].splitlines()
-    return (sol,)
-
-
-@app.cell
-def _(sol):
-    sol["legend"]
-    return
-
-
-@app.cell
-def _(sol):
-    sol["word_find"]
-    return
+def _(evaluator, hf_evaluator, li):
+    for el in li:
+        resp = evaluator.evaluate_strings(prediction=el, reference="cat")['score']
+        resp2 = hf_evaluator.evaluate_strings(prediction=el, reference="cat")['score']
+        print(f"{el}: {resp}, {resp2}, {(resp + resp2) / 2}")
+    return el, resp, resp2
 
 
 @app.cell
