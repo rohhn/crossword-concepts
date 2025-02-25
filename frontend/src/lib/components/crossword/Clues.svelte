@@ -1,12 +1,10 @@
 <script lang="ts">
   import type { MouseEventHandler } from "svelte/elements";
   import Button from "../ui/button/button.svelte";
-  import type { Legend } from "./Crossword.svelte";
+  import type { CrosswordLegend } from "./Crossword.svelte";
 
-  export let questions: Array<Legend>;
-  export let currentSelectedQuestionIdx: number | null;
-
-  const highlightQuestionGrid = (direction: string, start: number, end: number) => {};
+  export let questions: Array<CrosswordLegend>;
+  export let currentSelectedQuestionIdx: number;
 </script>
 
 <div>
