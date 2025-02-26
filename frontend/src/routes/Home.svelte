@@ -1,6 +1,7 @@
 <script lang="ts">
   import Button from "$lib/components/ui/button/button.svelte";
   import Gif from "$lib/assets/travis-scott-fire.gif";
+  import { Link } from "svelte-routing";
 </script>
 
 <div class="flex h-full flex-col justify-center items-center text-center gap-y-4">
@@ -13,6 +14,6 @@
 
   <p>Ready to gamify your research? Upload your paper and start playing! 🚀</p>
 
-  <a href="/puzzle" class="text-center"><Button type="button">Get Started!</Button></a>
+  <Link to="/puzzle" class="text-center"><Button type="button">Get Started!</Button></Link>
   <img src={Gif} alt="Description of GIF" class="h-1/3 mx-auto rounded-sm" />
 </div>

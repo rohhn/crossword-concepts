@@ -6,12 +6,10 @@
   import Puzzles from "./routes/Puzzles.svelte";
   import About from "./routes/About.svelte";
   import { fade, slide } from "svelte/transition";
-  export let url = "";
 </script>
 
-<main class="">
+<main>
   <Router
-    {url}
     viewtransition={() => ({
       fn: fade,
       duration: 100,
