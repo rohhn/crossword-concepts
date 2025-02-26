@@ -1,0 +1,26 @@
+backend:
+    functions:
+        - entry: main.py
+          handler: app
+          name: fastapi
+          path: .
+          type: httpServer
+    language:
+        name: python
+        packageManager: pip
+        runtime: python3.13.x
+    path: backend/app
+frontend:
+    environment:
+        VITE_API_URL_FASTAPI: ${{ backend.functions.fastapi.url }}
+    path: frontend
+    publish: public
+    scripts:
+        build:
+            - npm run build
+        deploy:
+            - npm install
+    subdomain: crossword-concepts
+name: crossword-concepts
+region: us-east-1
+yamlVersion: 2
