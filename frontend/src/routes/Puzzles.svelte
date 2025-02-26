@@ -13,7 +13,7 @@
   let uploadComplete: boolean = false;
   let gameData: GameType | null = null;
   let isUploading = false;
-  const ENDPOINT = "http://127.0.0.1:8000";
+  const ENDPOINT = ${import.meta.env.VITE_FLASK_API_URL};
 
   async function resolveUpload(files: FileList) {
     const file: File | null = files.item(0);
