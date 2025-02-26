@@ -54,7 +54,7 @@
         {#each fileNames as fileName}
           <Badge class="mr-2 mb-2" variant="secondary">
             <span>{fileName}</span>
-            <Button size="sm" variant="destructive" class="text-xs ml-1 p-1" onclick={() => removeFile(fileName)}
+            <Button size="sm" class="text-xs ml-1 p-1" onclick={() => removeFile(fileName)}
               ><X class="h-3 w-3" /></Button
             >
           </Badge>
