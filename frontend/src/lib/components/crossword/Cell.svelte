@@ -29,7 +29,8 @@
       // classList.push("border-t");
     }
 
-    return classList.join(" ");
+    // return classList.join(" ");
+    return "";
   };
 
   const clearCellValue = (event: FocusEvent) => {
@@ -60,19 +61,18 @@
   };
 </script>
 
-<div class="m-0 p-0">
+<div class="m-0 p-0 aspect-square">
   {#if _isBlankCell}
-    <div
-      class="bg-zinc-900 w-full h-full border-solid border-slate-400 rounded-none shadow-none drop-shadow-none {computeBorderClasses()}"
-    ></div>
+    <div class="bg-transparent w-full h-full rounded-none shadow-none drop-shadow-none {computeBorderClasses()}"></div>
   {:else}
     {#if cell.startFor.length > 0}
-      <span class="absolute object-left-top text-[0.6rem] text-zinc-700"
+      <span
+        class="absolute object-left-top ps-[0.1rem] md:ps-[0.2rem] text-[0.4rem] md:text-[0.6rem] text-muted-foreground"
         >{cell.startFor.map((i) => i + 1).join(",")}</span
       >
     {/if}
     <Input
-      class="p-0 text-center rounded-none shadow-none drop-shadow-none caret-transparent {computeBorderClasses()}
+      class="w-full h-full p-0 text-center rounded-none shadow-none drop-shadow-none caret-transparent border-black {computeBorderClasses()}
       {cell.enteredValue !== cell.correctValue ? 'bg-red-100' : ''}
       {cell.enteredValue === '' ? 'bg-transparent' : ''}
       {cell.enteredValue === cell.correctValue ? 'bg-green-200' : ''}

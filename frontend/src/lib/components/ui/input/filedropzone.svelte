@@ -39,7 +39,8 @@
   allowing users to click anywhere on the drop zone to open the file dialog.
 -->
 <div
-  class="relative flex items-center justify-center border-2 border-dashed border-gray-400 rounded-md p-4 cursor-pointer"
+  role="form"
+  class="relative flex items-center justify-center border-2 border-dashed border-muted-foreground rounded-md p-4 cursor-pointer"
   on:dragover={handleDragOver}
   on:drop={handleDrop}
 >
@@ -50,9 +51,8 @@
     on:change={handleChange}
     class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
   />
-  <p class="flex items-center pointer-events-none text-gray-600">
-    <span class="pr-[1rem]"> Drop files here or click to select </span>
+  <div class="flex flex-col gap-y-4 items-center pointer-events-none px-4 text-muted-foreground">
+    <span> Drop files here or click to select </span>
     <Upload />
-  </p>
+  </div>
 </div>
-

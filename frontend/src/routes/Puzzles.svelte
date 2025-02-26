@@ -1,11 +1,18 @@
+<script module lang="ts">
+</script>
+
 <script lang="ts">
   import { toast } from "svelte-sonner";
   import FileUI from "$lib/components/subUI/FileUI.svelte";
   import GameUI from "$lib/components/subUI/gameUI.svelte";
-  import type { CrosswordData } from "$lib/components/crossword/Crossword.svelte";
+  import UploadingUI from "$lib/components/subUI/UploadingUI.svelte";
+  import type { GameType } from "$lib/components/subUI/gameUI.svelte";
+  import { fade, slide } from "svelte/transition";
 
+  let selectedFiles: FileList | null = null;
   let uploadComplete: boolean = false;
-  let crosswordData: CrosswordData | null = null;
+  let gameData: GameType | null = null;
+  let isUploading = false;
   const ENDPOINT = "http://127.0.0.1:8000";
 
   async function resolveUpload(files: FileList) {
@@ -14,11 +21,12 @@
 
     toast.info(`Got file: ${file.name}`);
 
+    isUploading = true;
     const formData = new FormData();
     formData.append("file", file);
     uploadComplete = true;
 
-    const uploadPromise = fetch(`${ENDPOINT}/upload`, {
+    const uploadPromise = fetch(`${ENDPOINT}/play`, {
       method: "POST",
       body: formData,
     })
@@ -29,16 +37,12 @@
         return response.json();
       })
       .then((data) => {
-        const gameData = data.game;
-        crosswordData = {
-          legend: gameData.legend,
-          solution: gameData.solution,
-        };
-        return crosswordData;
+        gameData = data;
+        return gameData;
       });
 
     toast.promise(uploadPromise, {
-      loading: "Uploading file...",
+      loading: "Building 🔧",
       success: (_) => "Upload complete, game ready!",
       error: (_) => `Error`,
     });
@@ -47,12 +51,36 @@
       await uploadPromise;
     } catch (error: any) {
       console.error("Upload error:", error);
+    } finally {
+      isUploading = false;
     }
   }
 </script>
 
-{#if uploadComplete && crosswordData}
-  <GameUI {crosswordData} />
-{:else}
-  <FileUI fileHandler={resolveUpload} />
-{/if}
+<div class="h-full w-full flex justify-center items-center">
+  {#if uploadComplete && gameData}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <GameUI {gameData} bind:selectedFiles />
+    </div>
+  {:else if isUploading}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <UploadingUI />
+    </div>
+  {:else}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <FileUI bind:selectedFiles fileHandler={resolveUpload} />
+    </div>
+  {/if}
+</div>
