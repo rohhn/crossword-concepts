@@ -8,7 +8,7 @@
 
   let fileUploaded = false;
   let fileNames: string[] = [];
-  let selectedFiles: FileList | null = null;
+  export let selectedFiles: FileList | null;
   let selectedFilesArray: File[] = [];
 
   export let fileHandler: (files: FileList) => void;
@@ -30,9 +30,7 @@
   }
 
   function removeFile(fileName: string) {
-    selectedFilesArray = selectedFilesArray.filter(
-      (file) => file.name !== fileName,
-    );
+    selectedFilesArray = selectedFilesArray.filter((file) => file.name !== fileName);
     fileNames = selectedFilesArray.map((file) => file.name);
     const dataTransfer = new DataTransfer();
     selectedFilesArray.forEach((file) => dataTransfer.items.add(file));
@@ -40,38 +38,28 @@
   }
 </script>
 
-<div class="flex flex-col items-center gap-4 w-full">
+<div class="flex flex-col items-center justify-center gap-4 w-full h-full">
   <p class="text-lg font-semibold">Turn Research into Play! 🎓🧩</p>
   <ul class="text-start border border-zinc-300 rounded-md p-2">
     <li>📄 Upload a research paper</li>
     <li>🧠 Solve word puzzles based on its content</li>
     <li>🎯 Enhance comprehension & retention</li>
   </ul>
-  <div class="w-[25vw]">
-    <Label for="file-input">Upload a File</Label>
-    <FileDrop
-      on:files={onFilesReceived}
-      accept="application/pdf"
-      multiple={false}
-    />
-    <Button on:click={startUpload} class="mt-[.3rem] mb-[.3rem] w-full">
-      upload
-    </Button>
+  <div>
+    <!-- <Label for="file-input">Upload a File</Label> -->
+    <FileDrop on:files={onFilesReceived} accept="application/pdf" multiple={false} />
+    <Button on:click={startUpload} class="mt-[.3rem] mb-[.3rem] w-full">upload</Button>
     {#if fileNames.length}
       <div class="w-full flex flex-wrap justify-start p-1">
         {#each fileNames as fileName}
           <Badge class="mr-2 mb-2" variant="secondary">
             <span>{fileName}</span>
-            <div
-              class="w-4 h-4 ml-1 cursor-pointer"
-              on:click={() => removeFile(fileName)}
+            <Button size="sm" variant="destructive" class="text-xs ml-1 p-1" onclick={() => removeFile(fileName)}
+              ><X class="h-3 w-3" /></Button
             >
-              <X size="15px" />
-            </div>
           </Badge>
         {/each}
       </div>
     {/if}
   </div>
 </div>
-

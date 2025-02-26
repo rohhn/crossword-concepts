@@ -2,4 +2,4 @@
   import { toast } from "svelte-sonner";
 </script>
 
-<div class="w-[75vw] h-[90vh]">this is the about page</div>
+<div class="h-full flex items-center justify-center text-center">this is the about page</div>

@@ -2,26 +2,26 @@
   import type { MouseEventHandler } from "svelte/elements";
   import Button from "../ui/button/button.svelte";
   import type { CrosswordLegend } from "./Crossword.svelte";
+  import Toggle from "../ui/toggle/toggle.svelte";
 
   export let questions: Array<CrosswordLegend>;
   export let currentSelectedQuestionIdx: number;
 </script>
 
-<div>
-  <h5 class="text-lg text-center font-medium leading-none pb-[.9rem]">Questions</h5>
-  <div class="flex flex-col gap-1">
+<div class="w-full">
+  <h5 class="static text-lg text-center font-medium leading-none pb-[.9rem]">Questions</h5>
+  <div class="grid grid-rows-7 overflow-y-scroll">
     {#each questions as legendObject, idx}
-      <Button
-        variant="ghost"
-        class="text-start"
-        type="button"
+      <!-- svelte-ignore a11y_interactive_supports_focus -->
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_missing_attribute -->
+      <a
+        role="button"
+        class="focus-visible:ring-ring inline-flex items-center justify-start rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 hover:bg-accent hover:text-accent-foreground p-2"
         onclick={() => {
-          currentSelectedQuestionIdx = idx;
-        }}>{idx + 1}. {legendObject.clue}</Button
+          currentSelectedQuestionIdx = currentSelectedQuestionIdx === idx ? -999 : idx;
+        }}>{idx + 1}. {legendObject.clue}</a
       >
-      <!-- <div role="button" class="p-1 text-sm hover:bg-blue-50 text-wrap" on:click={() => (currentQuestion = idx + 1)}>
-      {legendObject.clue}
-    </div> -->
     {/each}
   </div>
 </div>

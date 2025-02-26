@@ -1,3 +1,6 @@
+<script module lang="ts">
+</script>
+
 <script lang="ts">
   import { toast } from "svelte-sonner";
   import FileUI from "$lib/components/subUI/FileUI.svelte";
@@ -6,6 +9,7 @@
   import type { GameType } from "$lib/components/subUI/gameUI.svelte";
   import { fade, slide } from "svelte/transition";
 
+  let selectedFiles: FileList | null = null;
   let uploadComplete: boolean = false;
   let gameData: GameType | null = null;
   let isUploading = false;
@@ -53,16 +57,30 @@
   }
 </script>
 
-{#if uploadComplete && gameData}
-  <div in:slide={{ duration: 300 }} out:slide={{ duration: 400 }}>
-    <GameUI {gameData} />
-  </div>
-{:else if isUploading}
-  <div in:slide={{ duration: 300 }} out:slide={{ duration: 400 }}>
-    <UploadingUI />
-  </div>
-{:else}
-  <div in:slide={{ duration: 300 }} out:slide={{ duration: 400 }}>
-    <FileUI fileHandler={resolveUpload} />
-  </div>
-{/if}
+<div class="h-full w-full flex justify-center items-center">
+  {#if uploadComplete && gameData}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <GameUI {gameData} bind:selectedFiles />
+    </div>
+  {:else if isUploading}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <UploadingUI />
+    </div>
+  {:else}
+    <div
+      class="h-full w-full flex items-center justify-center"
+      in:slide={{ duration: 300 }}
+      out:slide={{ duration: 400 }}
+    >
+      <FileUI bind:selectedFiles fileHandler={resolveUpload} />
+    </div>
+  {/if}
+</div>

@@ -37,7 +37,9 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import * as AlertDialog from "$lib/components/ui/alert-dialog/index";
   import { onDestroy, onMount } from "svelte";
+  // import { resolveUpload } from "../../../routes/Puzzles.svelte";
 
+  export let selectedFiles: FileList | null;
   export let data: CrosswordData = {
     solution: "",
     legend: [],
@@ -158,6 +160,7 @@
       }
     }
     puzzleSolved = false;
+    currentSelectedQuestionIdx = -999;
   };
 
   export const revealCrossword = () => {
@@ -186,6 +189,12 @@
     return isSolved;
   };
 
+  // export const regenerateCrossword = () => {
+  //   if (selectedFiles) {
+  //     resolveUpload(selectedFiles);
+  //   }
+  // };
+
   onMount(() => {
     document.addEventListener("keydown", handleKeyDown);
     focusCell(currentX, currentY);
@@ -196,24 +205,26 @@
   });
 </script>
 
-<div>
-  <div class="flex flex-row flex-wrap justify-between gap-2">
-    <div id="crossword" class="row-span-2 justify-center">
+<div class="h-full w-full">
+  <div class="h-full w-full flex flex-row flex-wrap justify-between overflow-y-auto">
+    <div id="crossword" class="w-full md:w-1/2 flex flex-col gap-y-4 h-fit">
       <div class="flex flex-col gap-2">
-        <div>
-          <Button onclick={resetCrossword}>Reset</Button>
-          <Button onclick={revealCrossword}>Reveal</Button>
+        <div class="flex justify-center gap-2">
+          <Button size="sm" onclick={resetCrossword}>Reset</Button>
+          <Button size="sm" onclick={revealCrossword}>Reveal</Button>
           <Button
+            size="sm"
             onclick={() => {
               puzzleSolved = checkSolution();
               openAlertDialog = true;
             }}>Check</Button
           >
+          <!-- <Button size="sm" onclick={regenerateCrossword}>Re-generate</Button> -->
         </div>
         <Grid bind:gridSize bind:grid={crosswordGrid} bind:currentSelectedQuestionIdx bind:currentX bind:currentY />
       </div>
     </div>
-    <div id="quesitons" class="row-span-1">
+    <div id="quesitons" class="w-full md:w-1/2 p-2 h-full">
       <Clues bind:questions={data.legend} bind:currentSelectedQuestionIdx />
     </div>
   </div>

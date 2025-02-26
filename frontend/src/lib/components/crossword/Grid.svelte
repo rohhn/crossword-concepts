@@ -10,17 +10,8 @@
   export let currentY: number;
 </script>
 
-<div
-  class="grid border-collapse"
-  style="grid-template-columns: repeat({gridSize}, 2rem);"
->
+<div class="grid border-collapse aspect-square" style="grid-template-columns: repeat({gridSize}, 1fr);">
   {#each Object.entries(grid) as [_, cell]}
-    <Cell
-      bind:cell
-      bind:gridSize
-      bind:currentSelectedQuestionIdx
-      bind:currentX
-      bind:currentY
-    ></Cell>
+    <Cell bind:cell bind:gridSize bind:currentSelectedQuestionIdx bind:currentX bind:currentY></Cell>
   {/each}
 </div>

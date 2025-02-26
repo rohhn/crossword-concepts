@@ -32,11 +32,12 @@
 
   async function submitGuess() {
     // Prevent duplicate guesses
-    if (
-      guesses.some(
-        (item) => item.guess.toLowerCase() === inputVal.trim().toLowerCase(),
-      )
-    ) {
+
+    if (!inputVal.trim()) {
+      toast.warning("Enter a word!");
+      return;
+    }
+    if (guesses.some((item) => item.guess.toLowerCase() === inputVal.trim().toLowerCase())) {
       toast.warning("You have already guessed the word");
       inputVal = "";
       return;
@@ -84,7 +85,7 @@
   };
 </script>
 
-<div class="max-w-md mx-auto h-full flex flex-col">
+<div class="m-full h-full flex flex-col">
   <!-- Display current word progress -->
   <div class="mb-2">
     <div class="text-[.7rem] font-mono italic">{progress}</div>
@@ -92,12 +93,7 @@
   </div>
 
   <div class="flex items-center space-x-2">
-    <Input
-      bind:value={inputVal}
-      placeholder="give your best..."
-      on:keydown={enterFn}
-      disabled={solved}
-    />
+    <Input required bind:value={inputVal} placeholder="give your best..." on:keydown={enterFn} disabled={solved} />
 
     {#if solved}
       <Button variant="secondary" on:click={nextWord}>Next Word</Button>
@@ -106,7 +102,7 @@
     {/if}
   </div>
 
-  <div class="mt-4 overflow-y-auto h-full p-2 space-y-2 scrollbar-hide">
+  <div class="mt-4 h-full overflow-y-auto p-2 space-y-2 scrollbar-hide">
     {#each guesses as item (item.guess + item.score)}
       <div
         transition:fly={{ x: -50, duration: 300 }}
@@ -136,4 +132,3 @@
     scrollbar-width: none;
   }
 </style>
-

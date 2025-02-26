@@ -4,18 +4,11 @@
   import Gif from "$lib/assets/hangover-math.gif";
 </script>
 
-<div
-  class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 justify-center w-full h-full"
-  in:fade={{ duration: 300 }}
->
-  <h1 class="text-[3rem] font-mono font-semibold">
+<div class="flex flex-col items-center gap-y-4 justify-center w-full h-full" in:fade={{ duration: 300 }}>
+  <h1 class="text-2xl font-mono font-semibold w-full text-center">
     Building Game<span class="animate-ellipsis"></span>
   </h1>
-  <img
-    src={Gif}
-    alt="Description of GIF"
-    class="w-[30vw] mx-auto mt-[.5rem] rounded-sm"
-  />
+  <img src={Gif} alt="Description of GIF" class="w-full md:w-2/3 mx-auto rounded-sm" />
   <!-- <LoaderCircle class="animate-spin w-10 h-10" /> -->
 </div>
 
@@ -42,4 +35,3 @@
     width: 2ch; /* Reserve space for 2 characters (adjust as needed) */
   }
 </style>
-
