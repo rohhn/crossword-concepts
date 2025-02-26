@@ -13,7 +13,7 @@
   let uploadComplete: boolean = false;
   let gameData: GameType | null = null;
   let isUploading = false;
-  const ENDPOINT = ${import.meta.env.VITE_FLASK_API_URL};
+  const ENDPOINT = `${import.meta.env.VITE_FLASK_API_URL}`;
 
   async function resolveUpload(files: FileList) {
     const file: File | null = files.item(0);

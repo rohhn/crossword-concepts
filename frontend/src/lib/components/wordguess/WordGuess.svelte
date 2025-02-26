@@ -6,7 +6,7 @@
   import { toast } from "svelte-sonner";
 
   export let data: WordGuessType;
-  const ENDPOINT = ${import.meta.env.VITE_FLASK_API_URL};
+  const ENDPOINT = `${import.meta.env.VITE_FLASK_API_URL}`;
 
   let idx = 0;
   $: question = data.questions.at(idx);
