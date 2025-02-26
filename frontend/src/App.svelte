@@ -21,7 +21,7 @@
       <!-- sm:px-8 md:px-40 py-4 flex flex-col sm:gap-y-8 md:gap-y-8 -->
       <div id="navbar" class="static flex justify-between items-center font-mono h-[5vh]">
         <h5 class="font-semibold font-mono">
-          <Link to="/">Crossword Concepts</Link>
+          <Link to="/">Research Rumble</Link>
         </h5>
         <nav class="flex flex-row text-sm items-center font-semibold gap-3">
           <Link to="/puzzle">play</Link>
