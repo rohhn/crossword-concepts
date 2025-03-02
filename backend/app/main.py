@@ -8,9 +8,10 @@ from .utils import base_reader, SimilarityJSON
 from .workflows import chain
 from .models import context_llm, evaluator
 load_dotenv(dotenv_path="./.env")
+import os
 
 # INFO: global vars
-similarity_embeddings = evaluator()
+similarity_embeddings = evaluator(os.getenv("HUGGINGFACEHUB_API_TOKEN"))
 
 # INFO: server-end functions
 app = FastAPI()

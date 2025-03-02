@@ -83,13 +83,18 @@
     else if (score < 15) return "bg-yellow-300";
     else return "bg-red-300";
   };
+
+  const giveUpFn = () => {
+    toast.info("the right word is " + word);
+    nextWord();
+  };
 </script>
 
 <div class="m-full h-full flex flex-col">
   <!-- Display current word progress -->
   <div class="mb-2">
     <div class="text-[.7rem] font-mono italic">{progress}</div>
-    <Label>{question} &amp; {word}</Label>
+    <Label>{question}</Label>
   </div>
 
   <div class="flex items-center space-x-2">
@@ -100,6 +105,7 @@
     {:else}
       <Button variant="default" on:click={submitGuess}>guess</Button>
     {/if}
+    <Button variant="outline" on:click={giveUpFn}>Give Up</Button>
   </div>
 
   <div class="mt-4 h-full overflow-y-auto p-2 space-y-2 scrollbar-hide">

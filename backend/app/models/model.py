@@ -4,7 +4,7 @@ from langgraph.graph import MessagesState
 from ..utils import RespSchema, WordGuessSchema
 import json
 from langchain.evaluation import load_evaluator
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 
 class Model():
     def __init__(self, model="gpt-4o-mini-2024-07-18", prompt=None, tools=[]):
@@ -49,7 +49,7 @@ def context_llm(msg: str):
     resp = llm.invoke(prompt + msg).model_dump_json() # pyright: ignore
     return json.loads(resp)
 
-def evaluator():
-    embedding_model = HuggingFaceEmbeddings(model_name="TaylorAI/gte-tiny")
+def evaluator(api_key):
+    embedding_model = HuggingFaceInferenceAPIEmbeddings(model_name="TaylorAI/gte-tiny", api_key=api_key)
     hf_evaluator = load_evaluator("embedding_distance", embeddings=embedding_model) #pyright: ignore
     return hf_evaluator
